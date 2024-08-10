@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: doctor_service
+  datasource:
+    driver-class-name: org.h2.driver
+    url: jdbc:h2:mem:doctors
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+      show-sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2
+
+server:
+  port: 8080
+
+logging:
+  file:
+    name: logs/dev.log
+  level:
+    com:
+      ust:
+        jpa_demo: DEBUG
+    web: warn
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
