@@ -42,7 +42,6 @@ public class Patient {
     private LocalDateTime updatedOn;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "illness_table")
     private List<PreExistingIllness> preExistingIllnesses;
 }
 

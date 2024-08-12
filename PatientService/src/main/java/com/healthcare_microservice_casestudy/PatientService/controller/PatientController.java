@@ -40,6 +40,30 @@ public class PatientController {
         return patientService.getAllPatients();
     }
 
+    @PutMapping("/up/{id}")
+    public ResponseEntity<Patient> updatePatient(@PathVariable  long id,@RequestBody  Patient patient){
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(patientService.updatePatient(id,patient));
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Patient> findAPatient(@PathVariable long id){
+        Patient patient = patientService.getPatientById(id);
+        return ResponseEntity.status(HttpStatus.FOUND).body(patient);
+    }
+
+    @GetMapping("get/email")
+    public ResponseEntity<Patient> findAPatientByEmail( @RequestBody String email){
+        Patient patient = patientService.getPatientByEmail(email);
+        return ResponseEntity.status(HttpStatus.FOUND).body(patient);
+    }
+    @GetMapping("get/phone")
+    public ResponseEntity<Patient> findAPatientByPhone( @RequestBody String phone){
+        Patient patient = patientService.getPatientByPhone(phone);
+        return ResponseEntity.status(HttpStatus.FOUND).body(patient);
+    }
+
+
 
     private PatientDto toDto(Patient patient){
         return new PatientDto(patient.getId(),
@@ -59,8 +83,10 @@ public class PatientController {
         patient.setId(patientDto.id());
         patient.setPhone(patientDto.phone());
         patient.setEmail(patientDto.email());
+        patient.setAddress(patientDto.address());
         patient.setPreExistingIllnesses(patientDto.preExistingIllnesses());
 
         return patient;
     }
+
 }
